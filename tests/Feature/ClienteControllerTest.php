@@ -31,7 +31,7 @@ class ClienteControllerTest extends TestCase
         $clients = Cliente::factory()->count(3)->create();
 
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->get('/api/clientes');
+        $response = $this->get(route('clientes.index'));
 
         // Verificar: Checar se a resposta é bem-sucedida e contém os clientes
         $response->assertStatus(200);
@@ -50,7 +50,7 @@ class ClienteControllerTest extends TestCase
         $client = Cliente::factory()->create();
 
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->get("/api/clientes/{$client->id}");
+        $response = $this->get(route('clientes.show', $client->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e contém o cliente
         $response->assertStatus(200);
@@ -74,7 +74,7 @@ class ClienteControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição POST para o endpoint da API
-        $response = $this->post('/api/clientes', $data);
+        $response = $this->post(route('clientes.store'), $data);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi criado
         $response->assertStatus(201);
@@ -101,7 +101,7 @@ class ClienteControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição PUT para o endpoint da API
-        $response = $this->put("/api/clientes/{$client->id}", $data);
+        $response = $this->put(route('clientes.update', $client->id), $data);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi atualizado
         $response->assertStatus(200);
@@ -120,7 +120,7 @@ class ClienteControllerTest extends TestCase
         $client = Cliente::factory()->create();
 
         // Executar: Enviar uma requisição DELETE para o endpoint da API
-        $response = $this->delete("/api/clientes/{$client->id}");
+        $response = $this->delete(route('clientes.destroy', $client->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi deletado
         $response->assertStatus(200);

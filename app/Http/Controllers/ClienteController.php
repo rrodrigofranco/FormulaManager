@@ -59,7 +59,7 @@ class ClienteController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/clientes",
+     *     path="/api/v1/clientes",
      *     summary="Obter lista de clientes",
      *     tags={"Clientes"},
      *     @OA\Response(
@@ -81,7 +81,7 @@ class ClienteController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/clientes",
+     *     path="/api/v1/clientes",
      *     summary="Criar um novo cliente",
      *     tags={"Clientes"},
      *     @OA\RequestBody(
@@ -127,7 +127,7 @@ class ClienteController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/clientes/{id}",
+     *     path="/api/v1/clientes/{id}",
      *     summary="Obter um cliente específico",
      *     tags={"Clientes"},
      *     @OA\Parameter(
@@ -164,7 +164,7 @@ class ClienteController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/clientes/{id}",
+     *     path="/api/v1/clientes/{id}",
      *     summary="Atualizar um cliente específico",
      *     tags={"Clientes"},
      *     @OA\Parameter(
@@ -223,7 +223,7 @@ class ClienteController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/clientes/{id}",
+     *     path="/api/v1/clientes/{id}",
      *     summary="Excluir um cliente específico",
      *     tags={"Clientes"},
      *     @OA\Parameter(

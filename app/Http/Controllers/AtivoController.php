@@ -44,7 +44,7 @@ class AtivoController extends Controller
 {
      /**
      * @OA\Get(
-     *     path="/api/ativos",
+     *     path="/api/v1/ativos",
      *     summary="Listar todos os ativos",
      *     tags={"Ativos"},
      *     @OA\Response(
@@ -67,7 +67,7 @@ class AtivoController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/ativos",
+     *     path="/api/v1/ativos",
      *     summary="Criar um novo ativo",
      *     tags={"Ativos"},
      *     @OA\RequestBody(
@@ -109,7 +109,7 @@ class AtivoController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/ativos/{id}",
+     *     path="/api/v1/ativos/{id}",
      *     summary="Exibir detalhes de um ativo",
      *     tags={"Ativos"},
      *     @OA\Parameter(
@@ -147,7 +147,7 @@ class AtivoController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/ativos/{id}",
+     *     path="/api/v1/ativos/{id}",
      *     summary="Atualizar um ativo existente",
      *     tags={"Ativos"},
      *     @OA\Parameter(
@@ -203,7 +203,7 @@ class AtivoController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/ativos/{id}",
+     *     path="/api/v1/ativos/{id}",
      *     summary="Excluir um ativo existente",
      *     tags={"Ativos"},
      *     @OA\Parameter(

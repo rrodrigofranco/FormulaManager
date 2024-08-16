@@ -21,9 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('clientes', ClienteController::class);
-Route::apiResource('formulas', FormulaController::class);
-Route::apiResource('ativos', AtivoController::class);
+Route::prefix('v1')->group(function () {
+    Route::apiResource('clientes', ClienteController::class);
+    Route::apiResource('formulas', FormulaController::class);
+    Route::apiResource('ativos', AtivoController::class);
+});
 
 Route::get('/docs', function () {
     Artisan::call('l5-swagger:generate');

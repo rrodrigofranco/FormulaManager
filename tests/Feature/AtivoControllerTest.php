@@ -31,7 +31,7 @@ class AtivoControllerTest extends TestCase
         Ativo::factory()->count(3)->create();
 
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->getJson('/api/ativos');
+        $response = $this->getJson(route('ativos.index'));
 
         // Verificar: Checar se a resposta é bem-sucedida e se contém o número correto de ativos
         $response->assertStatus(200);
@@ -53,7 +53,7 @@ class AtivoControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição POST para o endpoint da API
-        $response = $this->postJson('/api/ativos', $data);
+        $response = $this->postJson(route('ativos.store'), $data);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi criado
         $response->assertStatus(201);
@@ -72,7 +72,7 @@ class AtivoControllerTest extends TestCase
         $ativo = Ativo::factory()->create();
 
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->getJson("/api/ativos/{$ativo->id}");
+        $response = $this->getJson(route('ativos.show', $ativo->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e se contém o ativo
         $response->assertStatus(200);
@@ -101,7 +101,7 @@ class AtivoControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição PUT para o endpoint da API
-        $response = $this->putJson("/api/ativos/{$ativo->id}", $updatedData);
+        $response = $this->putJson(route('ativos.update', $ativo->id), $updatedData);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi atualizado
         $response->assertStatus(200);
@@ -120,7 +120,7 @@ class AtivoControllerTest extends TestCase
         $ativo = Ativo::factory()->create();
 
         // Executar: Enviar uma requisição DELETE para o endpoint da API
-        $response = $this->deleteJson("/api/ativos/{$ativo->id}");
+        $response = $this->deleteJson(route('ativos.destroy', $ativo->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi deletado
         $response->assertStatus(200);

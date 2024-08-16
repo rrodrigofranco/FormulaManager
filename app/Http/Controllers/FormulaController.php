@@ -48,7 +48,7 @@ class FormulaController extends Controller
 {
      /**
      * @OA\Get(
-     *     path="/api/formulas",
+     *     path="/api/v1/formulas",
      *     summary="Obter lista de fórmulas",
      *     tags={"Fórmulas"},
      *     @OA\Response(
@@ -71,7 +71,7 @@ class FormulaController extends Controller
 
      /**
      * @OA\Post(
-     *     path="/api/formulas",
+     *     path="/api/v1/formulas",
      *     summary="Criar uma nova fórmula",
      *     tags={"Fórmulas"},
      *     @OA\RequestBody(
@@ -124,7 +124,7 @@ class FormulaController extends Controller
 
      /**
      * @OA\Get(
-     *     path="/api/formulas/{id}",
+     *     path="/api/v1/formulas/{id}",
      *     summary="Exibir detalhes de uma fórmula",
      *     tags={"Fórmulas"},
      *     @OA\Parameter(
@@ -161,7 +161,7 @@ class FormulaController extends Controller
 
      /**
      * @OA\Put(
-     *     path="/api/formulas/{id}",
+     *     path="/api/v1/formulas/{id}",
      *     summary="Atualizar uma fórmula existente",
      *     tags={"Fórmulas"},
      *     @OA\Parameter(
@@ -225,7 +225,7 @@ class FormulaController extends Controller
 
      /**
      * @OA\Delete(
-     *     path="/api/formulas/{id}",
+     *     path="/api/v1/formulas/{id}",
      *     summary="Excluir uma fórmula existente",
      *     tags={"Fórmulas"},
      *     @OA\Parameter(
