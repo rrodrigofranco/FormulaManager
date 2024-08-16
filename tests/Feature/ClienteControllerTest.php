@@ -3,20 +3,28 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Cliente;
 
+/**
+ * Testes para o ClienteController.
+ *
+ * Este conjunto de testes abrange as funcionalidades essenciais do controller responsável pela gestão dos recursos
+ * de 'Clientes'. Os testes verificam a criação, leitura, atualização e deleção de registros de clientes, bem como as
+ * relações entre 'Clientes' e outras entidades, como 'Formulas'.
+ *
+ * Comando para executar: php artisan test --filter=ClienteControllerTest
+ */
 class ClienteControllerTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
 
-    /** @test php artisan test --filter=it_can_list_all_clients */
+    /**
+     * Testar a listagem de todos os clientes.
+     *
+     * Comando: php artisan test --filter=it_can_list_all_clients
+     */
+    /** @test */
     public function it_can_list_all_clients()
     {
         // Preparar: Criar alguns clientes
@@ -30,7 +38,12 @@ class ClienteControllerTest extends TestCase
         $response->assertJson($clients->toArray());
     }
 
-    /** @test php artisan test --filter=it_can_show_a_specific_client */
+    /**
+     * Testar a listagem de um cliente especifico.
+     *
+     * Comando: php artisan test --filter=it_can_show_a_specific_client
+     */
+    /** @test */
     public function it_can_show_a_specific_client()
     {
         // Preparar: Criar um cliente
@@ -44,7 +57,12 @@ class ClienteControllerTest extends TestCase
         $response->assertJson($client->toArray());
     }
 
-    /** @test php artisan test --filter=it_can_create_a_new_client */
+    /**
+     * Testar a criação de um novo cliente.
+     *
+     * Comando: php artisan test --filter=it_can_create_a_new_client
+     */
+    /** @test */
     public function it_can_create_a_new_client()
     {
         // Preparar: Preparar os dados para o novo cliente
@@ -63,7 +81,12 @@ class ClienteControllerTest extends TestCase
         $this->assertDatabaseHas('clientes', $data);
     }
 
-    /** @test  php artisan test --filter=it_can_update_a_client */
+    /**
+     * Testar a atualização de um cliente.
+     *
+     * Comando: php artisan test --filter=it_can_update_a_client
+     */
+    /** @test */
     public function it_can_update_a_client()
     {
         // Preparar: Criar um cliente
@@ -85,7 +108,12 @@ class ClienteControllerTest extends TestCase
         $this->assertDatabaseHas('clientes', $data);
     }
 
-    /** @test php artisan test --filter=it_can_delete_a_client */
+    /**
+     * Testar a exclusão de um cliente.
+     *
+     * Comando: php artisan test --filter=it_can_delete_a_client
+     */
+    /** @test */
     public function it_can_delete_a_client()
     {
         // Preparar: Criar um cliente
