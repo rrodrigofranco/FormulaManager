@@ -38,14 +38,15 @@ class FormulaControllerTest extends TestCase
         $data = [
             'cliente_id' => $cliente->id,
             'nome' => 'Formula X',
+            'descricao' => 'Teste Formula',
             'ativos' => $ativos->pluck('id')->toArray(),
         ];
 
         $response = $this->postJson(route('formulas.store'), $data);
-
+        $formula_id = $response->json('id');
         $response->assertStatus(201);
         $this->assertDatabaseHas('formulas', ['nome' => 'Formula X']);
-        $this->assertDatabaseHas('ativo_formula', ['formula_id' => 1, 'ativo_id' => $ativos[0]->id]);
+        $this->assertDatabaseHas('formula_ativo', ['formula_id' => $formula_id, 'ativo_id' => $ativos[0]->id]);
     }
 
     /** @test php artisan test --filter=it_can_show_a_formula */

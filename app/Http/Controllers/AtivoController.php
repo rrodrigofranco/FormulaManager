@@ -59,7 +59,7 @@ class AtivoController extends Controller
      * )
      */
 
-    // Listar Ativos 
+    // Listar Ativos
     public function index()
     {
         return response()->json(Ativo::all(), 200);
@@ -104,7 +104,7 @@ class AtivoController extends Controller
         $ativo = Ativo::create($validated);
 
         // Retornar o Ativo criado no formato json
-        return response()->json($ativo, 200);
+        return response()->json($ativo, 201);
     }
 
     /**
