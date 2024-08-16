@@ -55,75 +55,75 @@ Este projeto consiste em uma API desenvolvida para uma farmácia de manipulaçã
 
 ### Endpoints para Clientes
 
-- **GET /api/clientes**
+- **GET /api/v1/clientes**
   - Lista todos os clientes.
 
-- **POST /api/clientes**
+- **POST /api/v1/clientes**
   - Cria um novo cliente.
   - **Parâmetros:**
     - `nome`: string, obrigatório.
     - `cpf`: string, obrigatório.
     - `telefone`: string, opcional.
 
-- **GET /api/clientes/{id}**
+- **GET /api/v1/clientes/{id}**
   - Obtém detalhes de um cliente específico.
 
-- **PUT /api/clientes/{id}**
+- **PUT /api/v1/clientes/{id}**
   - Atualiza as informações de um cliente específico.
   - **Parâmetros:**
     - `nome`: string, opcional.
     - `cpf`: string, opcional.
     - `telefone`: string, opcional.
 
-- **DELETE /api/clientes/{id}**
+- **DELETE /api/v1/clientes/{id}**
   - Exclui um cliente específico.
 
 ### Endpoints para Fórmulas de Manipulação
 
-- **GET /api/formulas**
+- **GET /api/v1/formulas**
   - Lista todas as fórmulas de manipulação.
 
-- **POST /api/formulas**
+- **POST /api/v1/formulas**
   - Cria uma nova fórmula de manipulação.
   - **Parâmetros:**
     - `nome`: string, obrigatório.
     - `descricao`: string, opcional.
     - `cliente_id`: integer, obrigatório.
 
-- **GET /api/formulas/{id}**
+- **GET /api/v1/formulas/{id}**
   - Obtém detalhes de uma fórmula de manipulação específica.
 
-- **PUT /api/formulas/{id}**
+- **PUT /api/v1/formulas/{id}**
   - Atualiza as informações de uma fórmula de manipulação específica.
   - **Parâmetros:**
     - `nome`: string, opcional.
     - `descricao`: string, opcional.
     - `cliente_id`: integer, opcional.
 
-- **DELETE /api/formulas/{id}**
+- **DELETE /api/v1/formulas/{id}**
   - Exclui uma fórmula de manipulação específica.
 
 ### Endpoints para Ativos
 
-- **GET /api/ativos**
+- **GET /api/v1/ativos**
   - Lista todos os ativos.
 
-- **POST /api/ativos**
+- **POST /api/v1/ativos**
   - Adiciona um novo ativo.
   - **Parâmetros:**
     - `nome`: string, obrigatório.
     - `descricao`: string, opcional.
 
-- **GET /api/ativos/{id}**
+- **GET /api/v1/ativos/{id}**
   - Obtém detalhes de um ativo específico.
 
-- **PUT /api/ativos/{id}**
+- **PUT /api/v1/ativos/{id}**
   - Atualiza as informações de um ativo específico.
   - **Parâmetros:**
     - `nome`: string, opcional.
     - `descricao`: string, opcional.
 
-- **DELETE /api/ativos/{id}**
+- **DELETE /api/v1/ativos/{id}**
   - Exclui um ativo específico.
 
 ## Testes
@@ -133,5 +133,5 @@ Os teste podem ser realizados através do seguinte comando: <br />
 
 ## Documentação da API
 
-A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse  o endpoint `/api/documentation` no seu navegador.
+A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse  o endpoint `/api/v1/documentation` no seu navegador.
 
