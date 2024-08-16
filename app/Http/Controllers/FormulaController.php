@@ -5,25 +5,98 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Formula;
 
+/**
+ * @OA\Schema(
+ *     schema="Formula",
+ *     type="object",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="nome",
+ *         type="string",
+ *         example="Formula Example"
+ *     ),
+ *     @OA\Property(
+ *         property="descricao",
+ *         type="string",
+ *         example="Description of the formula"
+ *     ),
+ *     @OA\Property(
+ *         property="cliente_id",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         format="date-time",
+ *         example="2024-08-14T10:00:00Z"
+ *     ),
+ *     @OA\Property(
+ *         property="updated_at",
+ *         type="string",
+ *         format="date-time",
+ *         example="2024-08-14T10:00:00Z"
+ *     )
+ * )
+ */
+
 class FormulaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\Get(
+     *     path="/api/formulas",
+     *     summary="Obter lista de fórmulas",
+     *     tags={"Fórmulas"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem-sucedida",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Formula"))
+     *     ),
+     *     @OA\Response(response=401, description="Não autorizado"),
+     *     @OA\Response(response=403, description="Proibido"),
+     *     @OA\Response(response=404, description="Não encontrado"),
+     *     security={{"bearerAuth":{}}}
+     * )
      */
+
     public function index()
     {
         // Retrieve all formulas
         return response()->json(Formula::all(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\Post(
+     *     path="/api/formulas",
+     *     summary="Criar uma nova fórmula",
+     *     tags={"Fórmulas"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nome", "descricao", "cliente_id"},
+     *             @OA\Property(property="nome", type="string", example="Fórmula A"),
+     *             @OA\Property(property="descricao", type="string", example="Descrição da Fórmula A"),
+     *             @OA\Property(property="cliente_id", type="integer", example=1),
+     *             @OA\Property(property="ativos", type="array", @OA\Items(type="integer"), example={1, 2})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Fórmula criada com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Formula")
+     *     ),
+     *     @OA\Response(response=400, description="Requisição inválida"),
+     *     @OA\Response(response=401, description="Não autorizado"),
+     *     @OA\Response(response=403, description="Proibido"),
+     *     @OA\Response(response=422, description="Erro de validação"),
+     *     security={{"bearerAuth":{}}}
+     * )
      */
+
     public function store(Request $request)
     {
         // Validate the request
@@ -49,12 +122,30 @@ class FormulaController extends Controller
         return response()->json($formula->load('ativos'), 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\Get(
+     *     path="/api/formulas/{id}",
+     *     summary="Exibir detalhes de uma fórmula",
+     *     tags={"Fórmulas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID da fórmula"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Operação bem-sucedida",
+     *         @OA\JsonContent(ref="#/components/schemas/Formula")
+     *     ),
+     *     @OA\Response(response=401, description="Não autorizado"),
+     *     @OA\Response(response=403, description="Proibido"),
+     *     @OA\Response(response=404, description="Não encontrado"),
+     *     security={{"bearerAuth":{}}}
+     * )
      */
+
     public function show($id)
     {
         // Find the formula by ID
@@ -68,13 +159,40 @@ class FormulaController extends Controller
         return response()->json($formula, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\Put(
+     *     path="/api/formulas/{id}",
+     *     summary="Atualizar uma fórmula existente",
+     *     tags={"Fórmulas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID da fórmula"
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nome", type="string", example="Fórmula Atualizada"),
+     *             @OA\Property(property="descricao", type="string", example="Descrição atualizada da fórmula"),
+     *             @OA\Property(property="cliente_id", type="integer", example=1),
+     *             @OA\Property(property="ativos", type="array", @OA\Items(type="integer"), example={1, 3})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Fórmula atualizada com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Formula")
+     *     ),
+     *     @OA\Response(response=400, description="Requisição inválida"),
+     *     @OA\Response(response=401, description="Não autorizado"),
+     *     @OA\Response(response=403, description="Proibido"),
+     *     @OA\Response(response=404, description="Não encontrado"),
+     *     security={{"bearerAuth":{}}}
+     * )
      */
+
     public function update(Request $request, $id)
     {
         // Validate the request
@@ -105,12 +223,29 @@ class FormulaController extends Controller
         return response()->json($formula->load('ativos'), 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\Delete(
+     *     path="/api/formulas/{id}",
+     *     summary="Excluir uma fórmula existente",
+     *     tags={"Fórmulas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer"),
+     *         description="ID da fórmula"
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Fórmula excluída com sucesso"
+     *     ),
+     *     @OA\Response(response=401, description="Não autorizado"),
+     *     @OA\Response(response=403, description="Proibido"),
+     *     @OA\Response(response=404, description="Não encontrado"),
+     *     security={{"bearerAuth":{}}}
+     * )
      */
+
     public function destroy($id)
     {
          // Find the formula by ID

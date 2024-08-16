@@ -24,3 +24,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('clientes', ClienteController::class);
 Route::apiResource('formulas', FormulaController::class);
 Route::apiResource('ativos', AtivoController::class);
+
+Route::get('/docs', function () {
+    Artisan::call('l5-swagger:generate');
+    return redirect('/api/documentation');
+});
+

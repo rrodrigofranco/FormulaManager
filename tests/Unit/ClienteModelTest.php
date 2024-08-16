@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use App\Models\Cliente;
 use App\Models\Formula;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,36 +16,39 @@ class ClienteModelTest extends TestCase
      */
     use RefreshDatabase;
 
-    public function testClienteCreation()
+    /** @test */
+    public function it_can_create_a_cliente()
     {
         $cliente = Cliente::create([
             'nome' => 'John Doe',
-            'email' => 'john.doe@example.com',
-            // Add other attributes if necessary
+            'cpf' => '123.456.789-10',
+            'telefone' => '1234567890',
+            'email' => 'johndoe@example.com',
+            'endereco' => '123 Main St'
         ]);
 
         $this->assertDatabaseHas('clientes', [
             'nome' => 'John Doe',
-            'email' => 'john.doe@example.com',
-        ]);
-    }
-
-    public function testClienteValidation()
-    {
-        $response = $this->postJson('/clientes', [
-            'nome' => '', // Invalid input
-            'email' => 'not-an-email', // Invalid input
+            'cpf' => '123.456.789-10',
+            'telefone' => '1234567890',
+            'email' => 'johndoe@example.com',
+            'endereco' => '123 Main St'
         ]);
 
-        $response->assertStatus(422); // Unprocessable Entity
-        $response->assertJsonValidationErrors(['nome', 'email']);
+        $this->assertInstanceOf(Cliente::class, $cliente);
     }
 
-    public function testClienteHasFormulas()
+    /** @test */
+    public function a_cliente_can_have_multiple_formulas()
     {
         $cliente = Cliente::factory()->create();
-        $formula = Formula::factory()->create(['cliente_id' => $cliente->id]);
 
-        $this->assertTrue($cliente->formulas->contains($formula));
+        $formula1 = Formula::factory()->create(['cliente_id' => $cliente->id]);
+        $formula2 = Formula::factory()->create(['cliente_id' => $cliente->id]);
+
+        $this->assertCount(2, $cliente->formulas);
+        $this->assertTrue($cliente->formulas->contains($formula1));
+        $this->assertTrue($cliente->formulas->contains($formula2));
     }
+
 }

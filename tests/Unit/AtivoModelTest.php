@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Ativo;
 class AtivoModelTest extends TestCase
@@ -17,11 +17,13 @@ class AtivoModelTest extends TestCase
     public function testAtivoCreation()
     {
         $ativo = Ativo::create([
-            'descricao' => 'Test Ativo',
+            'nome' => 'Vitamina C',
+            'descricao' => 'Antioxidante',
         ]);
 
         $this->assertDatabaseHas('ativos', [
-            'descricao' => 'Test Ativo',
+            'nome' => 'Vitamina C',
+            'descricao' => 'Antioxidante',
         ]);
     }
 
