@@ -19,13 +19,13 @@ class ClienteControllerTest extends TestCase
     /** @test php artisan test --filter=it_can_list_all_clients */
     public function it_can_list_all_clients()
     {
-        // Arrange: Create some clients
+        // Preparar: Criar alguns clientes
         $clients = Cliente::factory()->count(3)->create();
 
-        // Act: Send a GET request to the API endpoint
+        // Executar: Enviar uma requisição GET para o endpoint da API
         $response = $this->get('/api/clientes');
 
-        // Assert: Check if the response is successful and contains the clients
+        // Verificar: Checar se a resposta é bem-sucedida e contém os clientes
         $response->assertStatus(200);
         $response->assertJson($clients->toArray());
     }
@@ -33,13 +33,13 @@ class ClienteControllerTest extends TestCase
     /** @test php artisan test --filter=it_can_show_a_specific_client */
     public function it_can_show_a_specific_client()
     {
-        // Arrange: Create a client
+        // Preparar: Criar um cliente
         $client = Cliente::factory()->create();
 
-        // Act: Send a GET request to the API endpoint
+        // Executar: Enviar uma requisição GET para o endpoint da API
         $response = $this->get("/api/clientes/{$client->id}");
 
-        // Assert: Check if the response is successful and contains the client
+        // Verificar: Checar se a resposta é bem-sucedida e contém o cliente
         $response->assertStatus(200);
         $response->assertJson($client->toArray());
     }
@@ -47,7 +47,7 @@ class ClienteControllerTest extends TestCase
     /** @test php artisan test --filter=it_can_create_a_new_client */
     public function it_can_create_a_new_client()
     {
-        // Arrange: Prepare the data for the new client
+        // Preparar: Preparar os dados para o novo cliente
         $data = [
             'nome' => 'Jane Doe',
             'cpf' => '987.654.321-00',
@@ -55,10 +55,10 @@ class ClienteControllerTest extends TestCase
             'email' => 'janedoe@example.com'
         ];
 
-        // Act: Send a POST request to the API endpoint
+        // Executar: Enviar uma requisição POST para o endpoint da API
         $response = $this->post('/api/clientes', $data);
 
-        // Assert: Check if the response is successful and the client was created
+        // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi criado
         $response->assertStatus(201);
         $this->assertDatabaseHas('clientes', $data);
     }
@@ -66,10 +66,10 @@ class ClienteControllerTest extends TestCase
     /** @test  php artisan test --filter=it_can_update_a_client */
     public function it_can_update_a_client()
     {
-        // Arrange: Create a client
+        // Preparar: Criar um cliente
         $client = Cliente::factory()->create();
 
-        // Prepare updated data
+        // Preparar dados atualizados
         $data = [
             'nome' => 'Jane Doe Updated',
             'cpf' => '987.654.321-00',
@@ -77,10 +77,10 @@ class ClienteControllerTest extends TestCase
             'email' => 'janeupdated@example.com'
         ];
 
-        // Act: Send a PUT request to the API endpoint
+        // Executar: Enviar uma requisição PUT para o endpoint da API
         $response = $this->put("/api/clientes/{$client->id}", $data);
 
-        // Assert: Check if the response is successful and the client was updated
+        // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi atualizado
         $response->assertStatus(200);
         $this->assertDatabaseHas('clientes', $data);
     }
@@ -88,13 +88,13 @@ class ClienteControllerTest extends TestCase
     /** @test php artisan test --filter=it_can_delete_a_client */
     public function it_can_delete_a_client()
     {
-        // Arrange: Create a client
+        // Preparar: Criar um cliente
         $client = Cliente::factory()->create();
 
-        // Act: Send a DELETE request to the API endpoint
+        // Executar: Enviar uma requisição DELETE para o endpoint da API
         $response = $this->delete("/api/clientes/{$client->id}");
 
-        // Assert: Check if the response is successful and the client was deleted
+        // Verificar: Checar se a resposta é bem-sucedida e se o cliente foi deletado
         $response->assertStatus(200);
         $this->assertDatabaseMissing('clientes', ['id' => $client->id]);
     }

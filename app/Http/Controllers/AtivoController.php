@@ -58,6 +58,8 @@ class AtivoController extends Controller
      *     security={{"bearerAuth":{}}}
      * )
      */
+
+    // Listar Ativos 
     public function index()
     {
         return response()->json(Ativo::all(), 200);
@@ -88,18 +90,21 @@ class AtivoController extends Controller
      *     security={{"bearerAuth":{}}}
      * )
      */
+
+     // Cadastrar Ativo
     public function store(Request $request)
     {
+        // Validar a requisição
         $validated = $request->validate([
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
         ]);
 
-        // Create a new ativo
+        // Criar um novo ativo
         $ativo = Ativo::create($validated);
 
-        // Return the created ativo
-        return response()->json($ativo, 201);
+        // Retornar o Ativo criado no formato json
+        return response()->json($ativo, 200);
     }
 
     /**
@@ -125,16 +130,18 @@ class AtivoController extends Controller
      *     security={{"bearerAuth":{}}}
      * )
      */
+
+     //Mostrar o Ativo
     public function show($id)
     {
-        // Find the ativo by ID
+        // Encontrar o Ativo pelo ID
         $ativo = Ativo::find($id);
 
         if (!$ativo) {
-            return response()->json(['message' => 'Ativo not found'], 404);
+            return response()->json(['message' => 'Ativo não encontrado!'], 404);
         }
 
-        // Return the ativo
+        // Retorna o Ativo em formato json
         return response()->json($ativo, 200);
     }
 
@@ -170,25 +177,27 @@ class AtivoController extends Controller
      *     security={{"bearerAuth":{}}}
      * )
      */
+
+     //Atualizar o Ativo
     public function update(Request $request, $id)
     {
-         // Validate the request
+         // Validar a requisição
          $validated = $request->validate([
             'nome' => 'sometimes|required|string|max:255',
             'descricao' => 'nullable|string',
         ]);
 
-        // Find the ativo by ID
+        // Encontrar o Ativo pelo ID
         $ativo = Ativo::find($id);
 
         if (!$ativo) {
-            return response()->json(['message' => 'Ativo not found'], 404);
+            return response()->json(['message' => 'Ativo não encontrado!'], 404);
         }
 
-        // Update the ativo
+        // Atualizar o Ativo
         $ativo->update($validated);
 
-        // Return the updated ativo
+        // Retornar o Ativo em formato Json
         return response()->json($ativo, 200);
     }
 
@@ -208,7 +217,7 @@ class AtivoController extends Controller
      *         response=200,
      *         description="Ativo excluído com sucesso",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Ativo deleted successfully")
+     *             @OA\Property(property="message", type="string", example="Ativo excluído com sucesso")
      *         )
      *     ),
      *     @OA\Response(response=401, description="Não autorizado"),
@@ -217,19 +226,21 @@ class AtivoController extends Controller
      *     security={{"bearerAuth":{}}}
      * )
      */
+
+     //Excluir o Ativo
     public function destroy($id)
     {
-        // Find the ativo by ID
+        // Encontrar o ativo pelo ID
         $ativo = Ativo::find($id);
 
         if (!$ativo) {
             return response()->json(['message' => 'Ativo not found'], 404);
         }
 
-        // Delete the ativo
+        // Excluir o ATivo
         $ativo->delete();
 
-        // Return success response
-        return response()->json(['message' => 'Ativo deleted successfully'], 200);
+        // Retornar o Ativo com mensagem de sucesso
+        return response()->json(['message' => 'Ativo excluído com sucesso'], 200);
     }
 }

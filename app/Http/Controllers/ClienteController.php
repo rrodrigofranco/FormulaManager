@@ -75,7 +75,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        // Retrieve all clients
+        // Listar todos os clientes
         return response()->json(Cliente::all(), 200);
     }
 
@@ -110,7 +110,7 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
+        // Validar a requisição
         $validated = $request->validate([
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:clientes',
@@ -118,10 +118,10 @@ class ClienteController extends Controller
             'email' => 'nullable|email|max:255|unique:clientes',
         ]);
 
-        // Create a new client
+        // Criar um novo cliente
         $cliente = Cliente::create($validated);
 
-        // Return the created client
+        // Retornar o cliente criado
         return response()->json($cliente, 201);
     }
 
@@ -151,14 +151,14 @@ class ClienteController extends Controller
 
     public function show($id)
     {
-        // Find the client by ID
+        // Encontrar o cliente pelo ID
         $cliente = Cliente::find($id);
 
         if (!$cliente) {
             return response()->json(['message' => 'Cliente não encontrado!'], 404);
         }
 
-        // Return the client
+        // Retornar o cliente
         return response()->json($cliente, 200);
     }
 
@@ -199,7 +199,7 @@ class ClienteController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the request
+        // Validar a requisição
         $validated = $request->validate([
             'nome' => 'sometimes|required|string|max:255',
             'cpf' => 'sometimes|required|string|max:14|unique:clientes,cpf,' . $id,
@@ -207,17 +207,17 @@ class ClienteController extends Controller
             'email' => 'nullable|email|max:255|unique:clientes,email,' . $id,
         ]);
 
-        // Find the client by ID
+        // Encontrar o cliente pelo ID
         $cliente = Cliente::find($id);
 
         if (!$cliente) {
             return response()->json(['message' => 'Cliente não encontrado!'], 404);
         }
 
-        // Update the client
+        // Atualizar o cliente
         $cliente->update($validated);
 
-        // Return the updated client
+        // Retornar o cliente atualizado
         return response()->json($cliente, 200);
     }
 
@@ -249,17 +249,17 @@ class ClienteController extends Controller
 
     public function destroy($id)
     {
-        // Find the client by ID
+        // Encontrar o cliente pelo ID
         $cliente = Cliente::find($id);
 
         if (!$cliente) {
             return response()->json(['message' => 'Cliente não encontrado!'], 404);
         }
 
-        // Delete the client
+        // Deletar o cliente
         $cliente->delete();
 
-        // Return success response
+        // Retornar resposta de sucesso
         return response()->json(['message' => 'Cliente excluído com sucesso!'], 200);
     }
 }

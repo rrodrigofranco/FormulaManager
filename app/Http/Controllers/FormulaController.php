@@ -65,7 +65,7 @@ class FormulaController extends Controller
 
     public function index()
     {
-        // Retrieve all formulas
+        // Listar todas as fórmulas
         return response()->json(Formula::all(), 200);
     }
 
@@ -99,7 +99,7 @@ class FormulaController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the request
+        // Validar a requisição
         $validated = $request->validate([
             'cliente_id' => 'required|exists:clientes,id',
             'nome' => 'required|string|max:255',
@@ -108,17 +108,17 @@ class FormulaController extends Controller
             'ativos.*' => 'exists:ativos,id',
         ]);
 
-        // Create a new formula
+        // Criar uma nova fórmula
         $formula = Formula::create([
             'cliente_id' => $validated['cliente_id'],
             'nome' => $validated['nome'],
             'descricao' => $validated['descricao'],
         ]);
 
-        // Associate ativos with the formula
+        // Associar ativos à fórmula
         $formula->ativos()->attach($validated['ativos']);
 
-        // Return the created formula
+        // Retornar a fórmula criada
         return response()->json($formula->load('ativos'), 201);
     }
 
@@ -148,7 +148,7 @@ class FormulaController extends Controller
 
     public function show($id)
     {
-        // Find the formula by ID
+        // Encontrar a fórmula pelo ID
         $formula = Formula::with('ativos')->find($id);
 
         if (!$formula) {
@@ -195,7 +195,7 @@ class FormulaController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the request
+        // Validar a requisição
         $validated = $request->validate([
             'cliente_id' => 'sometimes|required|exists:clientes,id',
             'nome' => 'sometimes|required|string|max:255',
@@ -204,22 +204,22 @@ class FormulaController extends Controller
             'ativos.*' => 'exists:ativos,id',
         ]);
 
-        // Find the formula by ID
+        // Encontrar a fórmula pelo ID
         $formula = Formula::find($id);
 
         if (!$formula) {
             return response()->json(['message' => 'Formula not found'], 404);
         }
 
-        // Update the formula
+        // Atualizar a fórmula
         $formula->update($validated);
 
-        // If ativos are provided, update the association
+        // Se ativos forem fornecidos, atualizar a associação
         if (isset($validated['ativos'])) {
             $formula->ativos()->sync($validated['ativos']);
         }
 
-        // Return the updated formula with associated ativos
+        // Retornar a fórmula atualizada com os ativos associados
         return response()->json($formula->load('ativos'), 200);
     }
 
@@ -248,20 +248,20 @@ class FormulaController extends Controller
 
     public function destroy($id)
     {
-         // Find the formula by ID
+         // Encontrar a fórmula pelo ID
          $formula = Formula::find($id);
 
          if (!$formula) {
              return response()->json(['message' => 'Formula not found'], 404);
          }
 
-         // Detach all associated ativos
+         // Desvincular todos os ativos associados
          $formula->ativos()->detach();
 
-         // Delete the formula
+         // Deletar a fórmula
          $formula->delete();
 
-         // Return success response
+         // Retornar resposta de sucesso
          return response()->json(['message' => 'Formula deleted successfully'], 200);
     }
 }
