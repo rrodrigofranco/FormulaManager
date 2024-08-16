@@ -1,64 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# API de Gerenciamento de Fórmulas de Manipulação
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição do Projeto
 
-## About Laravel
+Este projeto consiste em uma API desenvolvida para uma farmácia de manipulação, com o objetivo de gerenciar clientes, fórmulas de manipulação e os ativos utilizados nessas fórmulas. A API foi construída utilizando o framework Laravel, seguindo os princípios RESTful para garantir fácil integração e escalabilidade.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Objetivos Principais
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Gerenciamento de Dados:** A API permite o armazenamento e a manipulação de informações de clientes, fórmulas de manipulação e ativos.
+- **Processamento de Solicitações:** Implementa a lógica necessária para processar as solicitações de fórmulas feitas pelos clientes, incluindo a associação de ativos a essas fórmulas.
+- **Segurança e Eficiência:** Tratamento adequado de dados sensíveis como CPF, telefone, e nome, garantindo a segurança e a conformidade com as normas de privacidade.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologias Utilizadas
 
-## Learning Laravel
+- Laravel 11
+- MySQL
+- Swagger para documentação da API
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.x
+- Composer
+- MySQL
 
-## Laravel Sponsors
+## Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+1. Clone o repositório:
+   
+   git clone https://github.com/rrodrigofranco/FormulaManager
+   cd FormulaManager
 
-### Premium Partners
+2. Instale as dependências do projeto:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    composer install
 
-## Contributing
+3. Configure o arquivo .env:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    cp .env.example .env
+    php artisan key:generate
 
-## Code of Conduct
+4. Configure o banco de dados no arquivo .env:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nome_do_banco
+    DB_USERNAME=usuario
+    DB_PASSWORD=senha
 
-## Security Vulnerabilities
+5. Execute as migrações:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    php artisan migrate
 
-## License
+## Endpoints da API
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Endpoints para Clientes
+
+- **GET /api/clientes**
+  - Lista todos os clientes.
+
+- **POST /api/clientes**
+  - Cria um novo cliente.
+  - **Parâmetros:**
+    - `nome`: string, obrigatório.
+    - `cpf`: string, obrigatório.
+    - `telefone`: string, opcional.
+
+- **GET /api/clientes/{id}**
+  - Obtém detalhes de um cliente específico.
+
+- **PUT /api/clientes/{id}**
+  - Atualiza as informações de um cliente específico.
+  - **Parâmetros:**
+    - `nome`: string, opcional.
+    - `cpf`: string, opcional.
+    - `telefone`: string, opcional.
+
+- **DELETE /api/clientes/{id}**
+  - Exclui um cliente específico.
+
+### Endpoints para Fórmulas de Manipulação
+
+- **GET /api/formulas**
+  - Lista todas as fórmulas de manipulação.
+
+- **POST /api/formulas**
+  - Cria uma nova fórmula de manipulação.
+  - **Parâmetros:**
+    - `nome`: string, obrigatório.
+    - `descricao`: string, opcional.
+    - `cliente_id`: integer, obrigatório.
+
+- **GET /api/formulas/{id}**
+  - Obtém detalhes de uma fórmula de manipulação específica.
+
+- **PUT /api/formulas/{id}**
+  - Atualiza as informações de uma fórmula de manipulação específica.
+  - **Parâmetros:**
+    - `nome`: string, opcional.
+    - `descricao`: string, opcional.
+    - `cliente_id`: integer, opcional.
+
+- **DELETE /api/formulas/{id}**
+  - Exclui uma fórmula de manipulação específica.
+
+### Endpoints para Ativos
+
+- **GET /api/ativos**
+  - Lista todos os ativos.
+
+- **POST /api/ativos**
+  - Adiciona um novo ativo.
+  - **Parâmetros:**
+    - `nome`: string, obrigatório.
+    - `descricao`: string, opcional.
+
+- **GET /api/ativos/{id}**
+  - Obtém detalhes de um ativo específico.
+
+- **PUT /api/ativos/{id}**
+  - Atualiza as informações de um ativo específico.
+  - **Parâmetros:**
+    - `nome`: string, opcional.
+    - `descricao`: string, opcional.
+
+- **DELETE /api/ativos/{id}**
+  - Exclui um ativo específico.
+
+## Documentação da API
+
+A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse `/api/documentation` no seu navegador.
+
