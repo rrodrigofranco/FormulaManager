@@ -126,6 +126,11 @@ Este projeto consiste em uma API desenvolvida para uma farmácia de manipulaçã
 - **DELETE /api/ativos/{id}**
   - Exclui um ativo específico.
 
+## Testes
+
+Os teste podem ser realizados através do seguinte comando: <br />
+``` php artisan test ```
+
 ## Documentação da API
 
 A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse `/api/documentation` no seu navegador.
