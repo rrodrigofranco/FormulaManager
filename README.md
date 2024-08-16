@@ -26,30 +26,30 @@ Este projeto consiste em uma API desenvolvida para uma farmácia de manipulaçã
 
 1. Clone o repositório:
    
-   git clone https://github.com/rrodrigofranco/FormulaManager
-   cd FormulaManager
+   ```git clone https://github.com/rrodrigofranco/FormulaManager ```
+   ```cd FormulaManager ```
 
 2. Instale as dependências do projeto:
 
-    composer install
+    ```composer install```
 
 3. Configure o arquivo .env:
 
-    cp .env.example .env
-    php artisan key:generate
+    ```cp .env.example .env```
+    ```php artisan key:generate```
 
 4. Configure o banco de dados no arquivo .env:
 
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=nome_do_banco
-    DB_USERNAME=usuario
-    DB_PASSWORD=senha
+    ```DB_CONNECTION=mysql```
+    ```DB_HOST=127.0.0.1```
+    ```DB_PORT=3306```
+    ```DB_DATABASE=nome_do_banco```
+    ```DB_USERNAME=usuario```
+    ```DB_PASSWORD=senha```
 
 5. Execute as migrações:
 
-    php artisan migrate
+    ```php artisan migrate```
 
 ## Endpoints da API
 
