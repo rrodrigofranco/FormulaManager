@@ -133,5 +133,5 @@ Os teste podem ser realizados através do seguinte comando: <br />
 
 ## Documentação da API
 
-A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse  o endpoint `/api/v1/documentation` no seu navegador.
+A documentação da API foi gerada utilizando o Swagger. Para acessá-la, inicie o servidor localmente e acesse  o endpoint `/api/documentation` no seu navegador.
 

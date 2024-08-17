@@ -29,6 +29,6 @@ Route::prefix('v1')->group(function () {
 
 Route::get('/docs', function () {
     Artisan::call('l5-swagger:generate');
-    return redirect('/api/v1/documentation');
+    return redirect('/api/documentation');
 });
 
