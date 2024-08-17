@@ -62,7 +62,7 @@ Para criar um novo usuário na sua aplicação, envie uma requisição POST para
 **Parâmetros da Requisição:**
 
 
-```{```
+```{``` <br />
 ```    "name": "Exemplo de Usuário",``` <br />
 ```    "email": "email@exemplo.com",``` <br />
 ```    "password": "senha123",``` <br />
