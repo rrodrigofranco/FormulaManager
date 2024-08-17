@@ -74,6 +74,12 @@ Após a criação do usuário, você receberá uma resposta contendo um token de
 
 ## Endpoints da API
 
+### Endpoint para Documentação
+
+- **GET /api/documentation**
+  - Acesso a documentação feita pelo swagger
+
+
 ### Endpoints para Autenticação
 
 - **GET /api/v1/auth**
