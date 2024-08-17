@@ -47,7 +47,7 @@ class AuthController extends Controller
     /**
      * @OA\Post(
      *     path="/api/v1/auth",
-     *     summary="Registrar um novo usuário",
+     *     summary="Registrar um novo usuário e criar um Token de acesso",
      *     tags={"Autenticação"},
      *     @OA\RequestBody(
      *         required=true,

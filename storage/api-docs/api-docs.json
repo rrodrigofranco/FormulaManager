@@ -281,7 +281,7 @@
                 "tags": [
                     "Autenticação"
                 ],
-                "summary": "Registrar um novo usuário",
+                "summary": "Registrar um novo usuário e criar um Token de acesso",
                 "operationId": "33175bde1bbc6fbeaff1791fc5cf7437",
                 "requestBody": {
                     "required": true,
@@ -943,11 +943,11 @@
                     },
                     "name": {
                         "type": "string",
-                        "example": "Rodrigo Ribeiro"
+                        "example": "Nome de Teste"
                     },
                     "email": {
                         "type": "string",
-                        "example": "francorodrigognr@yahoo.com"
+                        "example": "email@teste.com"
                     },
                     "created_at": {
                         "type": "string",
