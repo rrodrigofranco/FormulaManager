@@ -276,6 +276,73 @@
                 ]
             }
         },
+        "/api/v1/auth": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Registrar um novo usuário",
+                "operationId": "33175bde1bbc6fbeaff1791fc5cf7437",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "nome",
+                                    "email",
+                                    "senha",
+                                    "senha_confirmacao"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nome Teste"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "teste@exemplo.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "senha123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "example": "senha123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário registrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "seu_token_aqui"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro de validação"
+                    }
+                }
+            }
+        },
         "/api/v1/clientes": {
             "get": {
                 "tags": [
@@ -868,6 +935,33 @@
                 },
                 "type": "object"
             },
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Rodrigo Ribeiro"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "francorodrigognr@yahoo.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-08-14T10:00:00Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-08-14T10:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
             "Cliente": {
                 "properties": {
                     "id": {
@@ -938,12 +1032,23 @@
                 },
                 "type": "object"
             }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
         {
             "name": "Ativos",
             "description": "Ativos"
+        },
+        {
+            "name": "Autenticação",
+            "description": "Autenticação"
         },
         {
             "name": "Clientes",

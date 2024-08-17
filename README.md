@@ -51,6 +51,26 @@ Este projeto consiste em uma API desenvolvida para uma farmácia de manipulaçã
 
     ```php artisan migrate```
 
+## Autenticação
+
+Para acessar os endpoints da API, você precisa fornecer um token de autenticação válido. O token deve ser incluído no cabeçalho `Authorization` das suas requisições HTTP.
+
+### Criar um Usuário
+
+Para criar um novo usuário na sua aplicação, envie uma requisição POST para a rota ```/v1/auth``` com os seguintes parâmetros:
+
+**Parâmetros da Requisição:**
+
+```
+{
+    "name": "Exemplo de Usuário",
+    "email": "email@exemplo.com",
+    "password": "senha123",
+    "password_confirmation": "senha123"
+} ```
+
+Após a criação do usuário, você receberá uma resposta contendo um token de autenticação. Esse token deve ser utilizado para autenticar suas requisições subsequentes.
+
 ## Endpoints da API
 
 ### Endpoints para Clientes

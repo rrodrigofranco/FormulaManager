@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AtivoController;
 use App\Http\Controllers\FormulaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,14 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->group(function () {
+Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::apiResource('clientes', ClienteController::class);
     Route::apiResource('formulas', FormulaController::class);
     Route::apiResource('ativos', AtivoController::class);
 });
 
+Route::post('/v1/auth', [AuthController::class, 'register']);
+
 Route::get('/docs', function () {
     Artisan::call('l5-swagger:generate');
     return redirect('/api/documentation');
 });
+
 

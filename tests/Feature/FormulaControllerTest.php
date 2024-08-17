@@ -7,6 +7,7 @@ use Tests\TestCase;
 use App\Models\Formula;
 use App\Models\Ativo;
 use App\Models\Cliente;
+use App\Models\User;
 
 /**
  * Testes para o FormulaController.
@@ -30,11 +31,17 @@ class FormulaControllerTest extends TestCase
      /** @test */
      public function it_can_list_all_formulas()
      {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
          // Preparar: Criar 5 fórmulas
          Formula::factory()->count(5)->create();
 
          // Executar: Enviar uma requisição GET para o endpoint da API de listagem de fórmulas
-         $response = $this->getJson(route('formulas.index'));
+         $response = $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson(route('formulas.index'));
 
          // Verificar: Checar se a resposta é bem-sucedida e se contém as 5 fórmulas
          $response->assertStatus(200);
@@ -49,6 +56,10 @@ class FormulaControllerTest extends TestCase
      /** @test */
      public function it_can_create_a_formula()
      {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
          // Preparar: Criar um cliente e 3 ativos
          $cliente = Cliente::factory()->create();
          $ativos = Ativo::factory()->count(3)->create();
@@ -62,7 +73,10 @@ class FormulaControllerTest extends TestCase
          ];
 
          // Executar: Enviar uma requisição POST para o endpoint da API de criação de fórmulas
-         $response = $this->postJson(route('formulas.store'), $data);
+         $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson(route('formulas.store'), $data);
+
          $formula_id = $response->json('id');
 
          // Verificar: Checar se a resposta é bem-sucedida e se a fórmula foi criada com os dados corretos
@@ -79,11 +93,17 @@ class FormulaControllerTest extends TestCase
      /** @test php artisan test --filter=it_can_show_a_formula */
      public function it_can_show_a_formula()
      {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
          // Preparar: Criar uma fórmula
          $formula = Formula::factory()->create();
 
          // Executar: Enviar uma requisição GET para o endpoint da API de exibição de fórmula
-         $response = $this->getJson(route('formulas.show', $formula->id));
+         $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson(route('formulas.show', $formula->id));
 
          // Verificar: Checar se a resposta é bem-sucedida e se contém os dados da fórmula criada
          $response->assertStatus(200);
@@ -101,12 +121,18 @@ class FormulaControllerTest extends TestCase
      /** @test */
      public function it_can_update_a_formula()
      {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
          // Preparar: Criar uma fórmula existente
          $formula = Formula::factory()->create();
          $newName = 'Updated Formula Name';
 
          // Executar: Enviar uma requisição PUT para o endpoint da API de atualização de fórmula
-         $response = $this->putJson(route('formulas.update', $formula->id), [
+         $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->putJson(route('formulas.update', $formula->id), [
              'nome' => $newName,
          ]);
 
@@ -123,11 +149,17 @@ class FormulaControllerTest extends TestCase
      /** @test */
      public function it_can_delete_a_formula()
      {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
          // Preparar: Criar uma fórmula existente
          $formula = Formula::factory()->create();
 
          // Executar: Enviar uma requisição DELETE para o endpoint da API de exclusão de fórmula
-         $response = $this->deleteJson(route('formulas.destroy', $formula->id));
+         $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->deleteJson(route('formulas.destroy', $formula->id));
 
          // Verificar: Checar se a resposta é bem-sucedida e se a fórmula foi deletada do banco de dados
          $response->assertStatus(200);

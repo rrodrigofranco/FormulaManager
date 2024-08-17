@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Ativo;
+use App\Models\User;
 
 /**
  * Testes para o AtivoController.
@@ -27,11 +28,18 @@ class AtivoControllerTest extends TestCase
     /** @test */
     public function it_can_list_all_ativos()
     {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
         // Preparar: Criar alguns ativos
         Ativo::factory()->count(3)->create();
 
+
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->getJson(route('ativos.index'));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson(route('ativos.index'));
 
         // Verificar: Checar se a resposta é bem-sucedida e se contém o número correto de ativos
         $response->assertStatus(200);
@@ -46,6 +54,10 @@ class AtivoControllerTest extends TestCase
     /** @test php artisan test --filter=it_can_create_an_ativo */
     public function it_can_create_an_ativo()
     {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
         // Preparar: Definir os dados para um novo ativo
         $data = [
             'nome' => 'Vitamina C',
@@ -53,7 +65,9 @@ class AtivoControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição POST para o endpoint da API
-        $response = $this->postJson(route('ativos.store'), $data);
+       $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->postJson(route('ativos.store'), $data);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi criado
         $response->assertStatus(201);
@@ -68,11 +82,17 @@ class AtivoControllerTest extends TestCase
     /** @test */
     public function it_can_show_an_ativo()
     {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
         // Preparar: Criar um ativo
         $ativo = Ativo::factory()->create();
 
         // Executar: Enviar uma requisição GET para o endpoint da API
-        $response = $this->getJson(route('ativos.show', $ativo->id));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->getJson(route('ativos.show', $ativo->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e se contém o ativo
         $response->assertStatus(200);
@@ -91,6 +111,10 @@ class AtivoControllerTest extends TestCase
     /** @test */
     public function it_can_update_an_ativo()
     {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
         // Preparar: Criar um ativo
         $ativo = Ativo::factory()->create();
 
@@ -101,7 +125,9 @@ class AtivoControllerTest extends TestCase
         ];
 
         // Executar: Enviar uma requisição PUT para o endpoint da API
-        $response = $this->putJson(route('ativos.update', $ativo->id), $updatedData);
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->putJson(route('ativos.update', $ativo->id), $updatedData);
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi atualizado
         $response->assertStatus(200);
@@ -116,11 +142,17 @@ class AtivoControllerTest extends TestCase
     /** @test */
     public function it_can_delete_an_ativo()
     {
+        //Criando o token
+        $user = User::factory()->create();
+        $token = $user->createToken('Token Teste')->plainTextToken;
+
         // Preparar: Criar um ativo
         $ativo = Ativo::factory()->create();
 
         // Executar: Enviar uma requisição DELETE para o endpoint da API
-        $response = $this->deleteJson(route('ativos.destroy', $ativo->id));
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token
+        ])->deleteJson(route('ativos.destroy', $ativo->id));
 
         // Verificar: Checar se a resposta é bem-sucedida e se o ativo foi deletado
         $response->assertStatus(200);

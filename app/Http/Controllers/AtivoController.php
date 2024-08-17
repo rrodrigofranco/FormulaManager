@@ -59,6 +59,7 @@ class AtivoController extends Controller
      * )
      */
 
+
     // Listar Ativos
     public function index()
     {
@@ -243,4 +244,35 @@ class AtivoController extends Controller
         // Retornar o Ativo com mensagem de sucesso
         return response()->json(['message' => 'Ativo excluído com sucesso'], 200);
     }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/auth",
+     *     summary="Registrar um novo usuário",
+     *     tags={"Autenticação"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"name", "email", "password", "password_confirmation"},
+     *             @OA\Property(property="name", type="string", example="Nome Teste"),
+     *             @OA\Property(property="email", type="string", example="teste@exemplo.com"),
+     *             @OA\Property(property="password", type="string", example="senha123"),
+     *             @OA\Property(property="password_confirmation", type="string", example="senha123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Usuário registrado com sucesso",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="user", ref="#/components/schemas/User"),
+     *             @OA\Property(property="token", type="string", example="seu_token_aqui")
+     *         )
+     *     ),
+     *     @OA\Response(response=422, description="Erro de validação"),
+     *     @OA\Tag(
+     *         name="Autenticação",
+     *         description="Endpoints relacionados à autenticação de usuários"
+     *     )
+     * )
+     */
 }
