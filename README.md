@@ -73,6 +73,11 @@ Após a criação do usuário, você receberá uma resposta contendo um token de
 
 ## Endpoints da API
 
+### Endpoints para Autenticação
+
+- **GET /api/v1/auth**
+  - Cria um novo usuário com um token.
+
 ### Endpoints para Clientes
 
 - **GET /api/v1/clientes**
