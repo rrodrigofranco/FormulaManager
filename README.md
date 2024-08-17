@@ -63,10 +63,10 @@ Para criar um novo usuário na sua aplicação, envie uma requisição POST para
 
 
 ```{```
-```    "name": "Exemplo de Usuário",```
-```    "email": "email@exemplo.com",```
-```    "password": "senha123",```
-```    "password_confirmation": "senha123"```
+```    "name": "Exemplo de Usuário",``` <br />
+```    "email": "email@exemplo.com",``` <br />
+```    "password": "senha123",``` <br />
+```    "password_confirmation": "senha123"``` <br />
 ```}```
 
 Após a criação do usuário, você receberá uma resposta contendo um token de autenticação. Esse token deve ser utilizado para autenticar suas requisições subsequentes.
