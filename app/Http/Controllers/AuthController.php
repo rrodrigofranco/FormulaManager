@@ -20,12 +20,12 @@ use Carbon\Carbon;
  *     @OA\Property(
  *         property="name",
  *         type="string",
- *         example="Rodrigo Ribeiro"
+ *         example="Nome de Teste"
  *     ),
  *     @OA\Property(
  *         property="email",
  *         type="string",
- *         example="francorodrigognr@yahoo.com"
+ *         example="email@teste.com"
  *     ),
  *     @OA\Property(
  *         property="created_at",
