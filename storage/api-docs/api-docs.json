@@ -13,13 +13,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/ativos": {
+        "/api/v1/ativos": {
             "get": {
                 "tags": [
                     "Ativos"
                 ],
                 "summary": "Listar todos os ativos",
-                "operationId": "d0ef3fdb2399b7be962c6d71e9c2bf84",
+                "operationId": "700489837ff82bb0da572800d4a6628f",
                 "responses": {
                     "200": {
                         "description": "Operação bem-sucedida",
@@ -55,7 +55,7 @@
                     "Ativos"
                 ],
                 "summary": "Criar um novo ativo",
-                "operationId": "d0776cb7670f77d531334cbcbdf2f17b",
+                "operationId": "1d07e39baa9f487b4bc61f65b14d1629",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -110,13 +110,13 @@
                 ]
             }
         },
-        "/api/ativos/{id}": {
+        "/api/v1/ativos/{id}": {
             "get": {
                 "tags": [
                     "Ativos"
                 ],
                 "summary": "Exibir detalhes de um ativo",
-                "operationId": "4f095320552db6a3f26f64976dd87ab8",
+                "operationId": "c78e90faa30de8343f90782baee4646f",
                 "parameters": [
                     {
                         "name": "id",
@@ -160,7 +160,7 @@
                     "Ativos"
                 ],
                 "summary": "Atualizar um ativo existente",
-                "operationId": "985097f65c4acb5fdca80fafb0bbed2a",
+                "operationId": "07d7f9e655ef8eb9d244c2570858d46d",
                 "parameters": [
                     {
                         "name": "id",
@@ -230,7 +230,7 @@
                     "Ativos"
                 ],
                 "summary": "Excluir um ativo existente",
-                "operationId": "1ac4e5f0bef8a4c16db17b343d64226b",
+                "operationId": "acf46cd780b402e9f25bc42500fd79e2",
                 "parameters": [
                     {
                         "name": "id",
@@ -251,7 +251,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Ativo deleted successfully"
+                                            "example": "Ativo excluído com sucesso"
                                         }
                                     },
                                     "type": "object"
@@ -276,13 +276,13 @@
                 ]
             }
         },
-        "/api/clientes": {
+        "/api/v1/clientes": {
             "get": {
                 "tags": [
                     "Clientes"
                 ],
                 "summary": "Obter lista de clientes",
-                "operationId": "de55d50d1b708d9e5c63ee3f8fe8f54a",
+                "operationId": "8cb764a5bb9179fd94337e581861bdcd",
                 "responses": {
                     "200": {
                         "description": "Operação bem-sucedida",
@@ -318,7 +318,7 @@
                     "Clientes"
                 ],
                 "summary": "Criar um novo cliente",
-                "operationId": "4ac6cdfa8d6c188fa2cb4f3263d4318a",
+                "operationId": "05514bbdbad0245251a8dcae16cbfe08",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -386,13 +386,13 @@
                 ]
             }
         },
-        "/api/clientes/{id}": {
+        "/api/v1/clientes/{id}": {
             "get": {
                 "tags": [
                     "Clientes"
                 ],
                 "summary": "Obter um cliente específico",
-                "operationId": "0d3826d79390929601421b5810b61231",
+                "operationId": "a0e80b43286062ad95dac14124a7b379",
                 "parameters": [
                     {
                         "name": "id",
@@ -436,7 +436,7 @@
                     "Clientes"
                 ],
                 "summary": "Atualizar um cliente específico",
-                "operationId": "74956b09f3ea120b5dd531c73776ca11",
+                "operationId": "33d2405a174ced1bc74634f9d0a81158",
                 "parameters": [
                     {
                         "name": "id",
@@ -515,7 +515,7 @@
                     "Clientes"
                 ],
                 "summary": "Excluir um cliente específico",
-                "operationId": "d15e304c609752c9f409ab81072fb52e",
+                "operationId": "88941e6e2081e40091a46be7e115edcb",
                 "parameters": [
                     {
                         "name": "id",
@@ -561,13 +561,13 @@
                 ]
             }
         },
-        "/api/formulas": {
+        "/api/v1/formulas": {
             "get": {
                 "tags": [
                     "Fórmulas"
                 ],
                 "summary": "Obter lista de fórmulas",
-                "operationId": "763323a10846eacb4eb797deee158eda",
+                "operationId": "aa46137fc0920e59e46ba28776aae0c8",
                 "responses": {
                     "200": {
                         "description": "Operação bem-sucedida",
@@ -603,7 +603,7 @@
                     "Fórmulas"
                 ],
                 "summary": "Criar uma nova fórmula",
-                "operationId": "190955cbd5f4e6310b242c776cd8d493",
+                "operationId": "b880e7f7f2aaab77077c560e32ce6b60",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -674,13 +674,13 @@
                 ]
             }
         },
-        "/api/formulas/{id}": {
+        "/api/v1/formulas/{id}": {
             "get": {
                 "tags": [
                     "Fórmulas"
                 ],
                 "summary": "Exibir detalhes de uma fórmula",
-                "operationId": "0ad0a929747cf75baeac4c82464bdc99",
+                "operationId": "05322da408734c84650f68b4d24b3e12",
                 "parameters": [
                     {
                         "name": "id",
@@ -724,7 +724,7 @@
                     "Fórmulas"
                 ],
                 "summary": "Atualizar uma fórmula existente",
-                "operationId": "6c6d23adbef68b7dadc56f4d3333a237",
+                "operationId": "97f59a2d381e3e2e7c92914af19fd860",
                 "parameters": [
                     {
                         "name": "id",
@@ -805,7 +805,7 @@
                     "Fórmulas"
                 ],
                 "summary": "Excluir uma fórmula existente",
-                "operationId": "56f29936439e62ac81b67cb541ff3cec",
+                "operationId": "e1c4f375b44c41253fc2036871a005e6",
                 "parameters": [
                     {
                         "name": "id",
