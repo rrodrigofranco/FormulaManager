@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Validator;
  *     @OA\Property(
  *         property="nome",
  *         type="string",
- *         example="Ativo Example"
+ *         example="Exemplo Ativo"
  *     ),
  *     @OA\Property(
  *         property="descricao",
  *         type="string",
- *         example="Description of the ativo"
+ *         example="Descrição do Ativo"
  *     ),
  *     @OA\Property(
  *         property="created_at",
