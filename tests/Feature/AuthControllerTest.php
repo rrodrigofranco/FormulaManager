@@ -23,8 +23,9 @@ class AuthControllerTest extends TestCase
     /**
      * Testa o registro de um novo usuário com dados válidos.
      *
-     * Comando: php artisan test --filter=it_can_register_user_with_valid_dat
+     * Comando: php artisan test --filter=it_can_register_user_with_valid_data
      */
+     /** @test */
     public function it_can_register_user_with_valid_data()
     {
         // Dados válidos para registro
@@ -65,6 +66,7 @@ class AuthControllerTest extends TestCase
      *
      * Comando: php artisan test --filter=it_can_register_user_with_invalid_data
      */
+     /** @test */
     public function it_can_register_user_with_invalid_data()
     {
         // Dados inválidos para registro
