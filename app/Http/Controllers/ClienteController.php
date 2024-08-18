@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Schema(
@@ -111,15 +112,19 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         // Validar a requisição
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:clientes',
             'telefone' => 'nullable|string|max:15',
             'email' => 'nullable|email|max:255|unique:clientes',
         ]);
 
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         // Criar um novo cliente
-        $cliente = Cliente::create($validated);
+        $cliente = Cliente::create($request->all());
 
         // Retornar o cliente criado
         return response()->json($cliente, 201);
@@ -200,12 +205,17 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         // Validar a requisição
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'sometimes|required|string|max:255',
             'cpf' => 'sometimes|required|string|max:14|unique:clientes,cpf,' . $id,
             'telefone' => 'nullable|string|max:15',
             'email' => 'nullable|email|max:255|unique:clientes,email,' . $id,
         ]);
+
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         // Encontrar o cliente pelo ID
         $cliente = Cliente::find($id);
@@ -215,7 +225,7 @@ class ClienteController extends Controller
         }
 
         // Atualizar o cliente
-        $cliente->update($validated);
+        $cliente->update($request->all());
 
         // Retornar o cliente atualizado
         return response()->json($cliente, 200);

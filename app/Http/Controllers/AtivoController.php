@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ativo;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Schema(
@@ -96,13 +97,17 @@ class AtivoController extends Controller
     public function store(Request $request)
     {
         // Validar a requisição
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
         ]);
 
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         // Criar um novo ativo
-        $ativo = Ativo::create($validated);
+        $ativo = Ativo::create($request->all());
 
         // Retornar o Ativo criado no formato json
         return response()->json($ativo, 201);
@@ -182,11 +187,16 @@ class AtivoController extends Controller
      //Atualizar o Ativo
     public function update(Request $request, $id)
     {
-         // Validar a requisição
-         $validated = $request->validate([
+        // Validar a requisição
+        $validator = Validator::make($request->all(), [
             'nome' => 'sometimes|required|string|max:255',
             'descricao' => 'nullable|string',
         ]);
+
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
         // Encontrar o Ativo pelo ID
         $ativo = Ativo::find($id);
@@ -196,7 +206,7 @@ class AtivoController extends Controller
         }
 
         // Atualizar o Ativo
-        $ativo->update($validated);
+        $ativo->update($request->all());
 
         // Retornar o Ativo em formato Json
         return response()->json($ativo, 200);

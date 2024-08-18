@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Formula;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * @OA\Schema(
@@ -100,7 +101,7 @@ class FormulaController extends Controller
     public function store(Request $request)
     {
         // Validar a requisição
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'cliente_id' => 'required|exists:clientes,id',
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string',
@@ -108,15 +109,16 @@ class FormulaController extends Controller
             'ativos.*' => 'exists:ativos,id',
         ]);
 
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         // Criar uma nova fórmula
-        $formula = Formula::create([
-            'cliente_id' => $validated['cliente_id'],
-            'nome' => $validated['nome'],
-            'descricao' => $validated['descricao'],
-        ]);
+        $formula = Formula::create($request->all());
 
         // Associar ativos à fórmula
-        $formula->ativos()->attach($validated['ativos']);
+        $formula->ativos()->attach($request->get('ativos'));
 
         // Retornar a fórmula criada
         return response()->json($formula->load('ativos'), 201);
@@ -152,7 +154,7 @@ class FormulaController extends Controller
         $formula = Formula::with('ativos')->find($id);
 
         if (!$formula) {
-            return response()->json(['message' => 'Formula not found'], 404);
+            return response()->json(['message' => 'Fórmula não encontrada'], 404);
         }
 
         // Return the formula with associated ativos
@@ -196,7 +198,7 @@ class FormulaController extends Controller
     public function update(Request $request, $id)
     {
         // Validar a requisição
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'cliente_id' => 'sometimes|required|exists:clientes,id',
             'nome' => 'sometimes|required|string|max:255',
             'descricao' => 'nullable|string',
@@ -204,19 +206,25 @@ class FormulaController extends Controller
             'ativos.*' => 'exists:ativos,id',
         ]);
 
+        // Retornar erros de validação se houver
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         // Encontrar a fórmula pelo ID
         $formula = Formula::find($id);
 
         if (!$formula) {
-            return response()->json(['message' => 'Formula not found'], 404);
+            return response()->json(['message' => 'Fórmula não encontrada'], 404);
         }
 
         // Atualizar a fórmula
-        $formula->update($validated);
+        $formula->update($request->all());
 
         // Se ativos forem fornecidos, atualizar a associação
-        if (isset($validated['ativos'])) {
-            $formula->ativos()->sync($validated['ativos']);
+        $ativos = $request->get('ativos');
+        if ($ativos) {
+            $formula->ativos()->sync($ativos);
         }
 
         // Retornar a fórmula atualizada com os ativos associados
@@ -252,7 +260,7 @@ class FormulaController extends Controller
          $formula = Formula::find($id);
 
          if (!$formula) {
-             return response()->json(['message' => 'Formula not found'], 404);
+             return response()->json(['message' => 'Fórmula não encontrada'], 404);
          }
 
          // Desvincular todos os ativos associados
@@ -262,6 +270,6 @@ class FormulaController extends Controller
          $formula->delete();
 
          // Retornar resposta de sucesso
-         return response()->json(['message' => 'Formula deleted successfully'], 200);
+         return response()->json(['message' => 'Fórmula excluída com sucesso'], 200);
     }
 }
