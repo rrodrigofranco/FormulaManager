@@ -51,6 +51,10 @@ Este projeto consiste em uma API desenvolvida para uma farmácia de manipulaçã
 
     ```php artisan migrate```
 
+6. Execute o composer:
+
+    ```composer install```
+
 ## Autenticação
 
 Para acessar os endpoints da API, você precisa fornecer um token de autenticação válido. O token deve ser incluído no cabeçalho `Authorization` das suas requisições HTTP.
